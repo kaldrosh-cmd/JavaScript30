@@ -65,15 +65,27 @@
     });
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
+    const allLinks = Array.from(document.querySelectorAll('.mw-category-group a'));
 
+    const namesWithDe = allLinks
+      .filter(el => el.textContent.toLowerCase().includes('de'))
+      .map(el => el.textContent.trim());
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+    const sortedPeople = people.toSorted((a, b) => {
+      const [aLast] = a.split(', ');
+      const [bLast] = b.split(', ');
+      return aLast.localeCompare(bLast);
+    });
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
-
+    const dataSummed = data.reduce((acc, vehicle) => {
+      acc[vehicle] = (acc[vehicle] || 0) + 1;
+      return acc;
+    },{})
   </script>
 </body>
 </html>
